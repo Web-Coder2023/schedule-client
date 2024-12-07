@@ -1,0 +1,38 @@
+.sidebar-menu {
+    min-width: 350px;
+    margin-right: 50px;
+    background-color: #f8f9fa;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 100%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  ul {
+    width: 100%;
+  }
+  .menu-item {
+    list-style: none;
+    margin: 10px 0;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .menu-item._active {
+    list-style: none;
+    margin: 10px 0;
+    background-color: #ddd;
+  }
+  
+  .menu-item a {
+    font-family: $font3;
+    color: #000000;
+    font-size: 22px;
+    display: block;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .menu-item:hover {
+    background-color: #ddd;
+  }
+  

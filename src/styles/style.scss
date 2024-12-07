@@ -1,0 +1,299 @@
+@import './global/fonts';
+@import './global/vars';
+@import './global/technical';
+@import './blocks/header';
+@import './blocks/hero';
+@import './blocks/event';
+@import './blocks/modal';
+@import './blocks/submenu-admin';
+@import './blocks/create-event';
+@import './blocks/footer';
+
+.auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); // Полупрозрачный фон
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    font-family: $font3;
+
+    &__title {
+        font-weight: 600;
+        font-size: 32px;
+        color: #363636;
+    }
+
+    &__content {
+        border-radius: 20px;
+        box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25);
+        background: #fff;
+        width: 90%;
+        max-width: 460px;
+        position: relative;
+        padding: 0 31px;
+        padding-bottom: 100px;
+        padding-top: 48px;
+    }
+
+    &__box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 50px;
+    }
+
+    &__box.reg {
+        justify-content: center;
+    }
+
+    &__tabs {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+
+    }
+
+    &__tab {
+
+        font-weight: 500;
+        font-size: 24px;
+        color: #a7a7a7;
+        cursor: pointer;
+    }
+
+    &__input {
+        display: flex;
+        align-items: center;
+        background: #f2f2f2;
+        border-radius: 25px;
+        height: 100%;
+        overflow: hidden;
+
+        &:not(:last-child) {
+            margin-bottom: 18px;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            padding-right: 20px;
+            background: transparent;
+        }
+
+
+        label {
+            width: 100px;
+            margin-right: 20px;
+            padding-left: 20px;
+            font-weight: 500;
+            font-size: 16px;
+            color: #595959;
+        }
+    }
+
+    ._btn {
+        font-size: 16px;
+        padding: 16px 40px;
+        cursor: pointer;
+    }
+}
+
+.reset {
+    &__box {
+        justify-content: flex-end;
+        margin-bottom: 49px;
+    }
+
+    &__title {
+        font-weight: 500;
+        font-size: 24px;
+        color: #595959;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    &__subtitle {
+        font-weight: 300;
+        font-size: 14px;
+        text-align: center;
+        color: #a7a7a7;
+        margin-bottom: 13px;
+    }
+
+    &-step {
+        display: flex;
+        flex-direction: column;
+
+        .back-link {
+            margin-top: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 500;
+            font-size: 20px;
+            color: #595959;
+        }
+
+        ._btn {
+            background: #595959;
+
+            font-weight: 500;
+            font-size: 16px;
+            color: #fff;
+        }
+    }
+}
+
+.code-input {
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.auth-modal__tab.active {
+    font-weight: 500;
+    font-size: 24px;
+    text-decoration: underline;
+    color: #595959;
+}
+
+.admin-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f5f3f3;
+
+    &__burger {
+        width: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 30px;
+        margin-left: 20px;
+        margin-top: 20px;
+
+        span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: #7c7b7b;
+        }
+    }
+
+    aside {
+        height: 100%;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        max-width: 400px;
+        border-right: 1px solid #232323;
+        background-color: #ffffff;
+        transition: all 0.4s ease-in-out;
+
+        &.hidden {
+            transform: translateX(-100%);
+        }
+
+        li {
+            padding-left: 20px;
+            font-weight: 700;
+            font-size: 24px;
+            color: #030303;
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        li.active {
+            background-color: #232323;
+            color: #fff;
+        }
+    }
+
+    &__home {
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+}
+
+.login-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+    font-family: $font3;
+    min-width: 400px;
+
+    .auth-modal__box {
+        justify-content: space-between;
+        flex: auto;
+        width: 100%;
+        gap: 20px;
+    }
+
+    h2 {
+        margin-bottom: 30px;
+        font-family: $font3;
+        font-weight: 500;
+        font-size: 34px;
+        color: #232323;
+    }
+
+    input {
+        width: 100%;
+        height: 50px;
+        padding: 10px;
+        border: 1px solid #595959;
+    }
+
+    ._btn {
+        font-weight: 500;
+        font-size: 16px;
+        color: #fff;
+        padding: 10px 43px;
+        font-size: 18px;
+        background: #595959;
+        height: 50px;
+        border-radius: 0;
+
+        &:after {
+            display: none;
+        }
+    }
+}
+
+/* Перекрытие стилей для горизонтального скролл-бара */
+.swiper-horizontal>.swiper-scrollbar,
+.swiper-scrollbar.swiper-scrollbar-horizontal {
+    position: static !important;
+    height: 10px !important;
+    background-color: transparent;
+    margin-top: 40px;
+
+    .swiper-scrollbar-drag {
+        height: 10px;
+        /* Толщина полоски */
+        background-color: #e2e2e2;
+        /* Цвет полоски */
+        margin-top: 20px;
+        bottom: 0;
+    }
+}
+
+.wrapper-admin {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.admin-content {
+    flex: auto;
+    padding-top: 40px;
+    overflow-y: auto;
+}
