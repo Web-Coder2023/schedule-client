@@ -36,7 +36,7 @@ const Hero = () => {
             <section className="hero">
                 <div className="hero__container">
                     <div className="hero__image _img">
-<SvgAnimation/>
+                        <SvgAnimation />
                     </div>
                     <div className="hero__box">
                         <h1>Подземелья Lounge</h1>

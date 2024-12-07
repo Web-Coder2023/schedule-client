@@ -1,19 +1,18 @@
 .hero {
     &__container {
+        height: 100vh;
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding-left: 57px;
         padding-right: 85px;
         padding: 0 57px 0 85px;
+        padding-top: 30px;
+        margin-right: 20px;
     }
 
     &__image {
         max-width: 100vh;
-        video {
-            height: 700px;
-            width: 700px;
-        }
     }
 
     &__box {
@@ -51,4 +50,5 @@
             margin-bottom: 25px;
         }
     }
+    margin-bottom: 89px;
 }

@@ -1,7 +1,7 @@
-// src/services/api.js
 import axios from "axios";
 
-const API_URL = "http://45.67.58.204:8000";
+// Используем переменную окружения для API URL
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000/api"; // fallback на локальный API
 
 // Аутентификация
 export const login = async (phone, password) => {
