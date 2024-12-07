@@ -1,7 +1,7 @@
 // src/services/api.js
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api";
+const API_URL = "http://45.67.58.204:8000";
 
 // Аутентификация
 export const login = async (phone, password) => {
