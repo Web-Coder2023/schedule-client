@@ -162,3 +162,45 @@
         gap: 20px;
     }
 }
+
+.modal-conf {
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.77);
+    padding: 30px;
+    padding-top: 16px;
+    max-width: 381px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    h2 {
+        font-family: $font3;
+        font-weight: 400;
+        font-size: 18px;
+        text-align: center;
+        color: #fff;
+    }
+
+    &__close {
+        margin-left: auto;
+        display: block;
+    }
+
+    &__btn {
+        font-family: $font3;
+        font-weight: 500;
+        font-size: 14px;
+        color: #fff;
+
+        border-radius: 25px;
+        background: #29a9ea;
+        padding: 12px 13px;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        margin: 0 auto;
+    }
+}

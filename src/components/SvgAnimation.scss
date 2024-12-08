@@ -39,6 +39,12 @@
 }
 .hero__image {
     width: 80vh;
+    @media (max-width: 1200px) {
+        width: 100%;
+    }
+    @media (max-width: 768px) {
+        width: 70%;
+    }
 
     svg {
         width: 100%;

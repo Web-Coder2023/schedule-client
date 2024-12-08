@@ -10,6 +10,7 @@ import { AuthProvider } from "./context/AuthContext";
 import HomePage from "./pages/HomePage";
 import HomePageAdmin from "./pages/HomePageAdmin";
 import PrivateRoute from "./routes/PrivateRoute";
+import ConfirmationModal from "./components/Modal/ConfirmationModal";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <ToastContainer position="top-center" autoClose={5000} />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/conf" element={<ConfirmationModal />} />
           <Route
             path="/admin"
             element={

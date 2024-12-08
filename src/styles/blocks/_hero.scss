@@ -7,8 +7,17 @@
         padding-left: 57px;
         padding-right: 85px;
         padding: 0 57px 0 85px;
+        gap: 100px;
         padding-top: 30px;
         margin-right: 20px;
+        @media (max-width: 1200px) {
+            flex-direction: column;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
     }
 
     &__image {
@@ -26,7 +35,16 @@
         font-family: $font5;
 
         h1 {
-            font-size: 80px;
+            font-size: 75px;
+            @media (max-width: 1500px) {
+                font-size: 60px;
+            }
+            @media (max-width: 1200px) {
+                font-size: 48px;
+            }
+            @media (max-width: 768px) {
+                font-size: 38px;
+            }
         }
 
         .line {
@@ -35,12 +53,21 @@
             height: 1px;
             background-color: #000;
             box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-            width: 400px;
+            width: 55%;
         }
 
         p {
             font-size: 40px;
             margin-bottom: clamp(30px, 5vw, 40px);
+            @media (max-width: 768px) {
+                font-size: 28px;
+            }
+        }
+        ._btn {
+            @media (max-width: 768px) {
+                padding: 10px 48px;
+                font-size: 24px;
+            }
         }
     }
 

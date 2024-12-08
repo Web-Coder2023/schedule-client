@@ -50,21 +50,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const registerUser = async (name, subname, phone, password) => {
+  const registerUser = async (name, subname, phone, password, isActive = false) => {
     try {
-      const { token } = await register(name, subname, phone, password);
-      localStorage.setItem("token", token);
-      setToken(token);
-      const userData = await getUserData(token);
-      setUser(userData);
-      toast.success("Регистрация успешна!");
-      navigate("/");
+      const response = await register(name, subname, phone, password);
+      if (!isActive) {
+        toast.info("Регистрация выполнена! Подтвердите через Telegram.");
+      } else {
+        const { token } = response;
+        localStorage.setItem("token", token);
+        setToken(token);
+        const userData = await getUserData(token);
+        setUser(userData);
+        toast.success("Регистрация успешна!");
+        navigate("/");
+      }
     } catch (error) {
       toast.error("Ошибка регистрации. Попробуйте позже.");
       console.error("Registration failed", error);
     }
   };
-
+  
   const logoutUser = async () => {
     try {
       await apiLogout();

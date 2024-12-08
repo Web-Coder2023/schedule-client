@@ -18,6 +18,15 @@ export const getUserData = async (token) => {
   const response = await axios.get(`${API_URL}/auth/profile`, {
     headers: { Authorization: `Bearer ${token}` },
   });
+  localStorage.setItem('userData', JSON.stringify(response.data));
+  return response.data;
+};
+
+// Активация пользователя
+export const activateUser = async (token) => {
+  const response = await axios.post(`${API_URL}/auth/activate`, {}, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return response.data;
 };
 

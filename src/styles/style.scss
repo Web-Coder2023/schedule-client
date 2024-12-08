@@ -88,7 +88,7 @@
 
 
         label {
-            width: 100px;
+            min-width: 100px;
             margin-right: 20px;
             padding-left: 20px;
             font-weight: 500;
@@ -105,6 +105,15 @@
 }
 
 .reset {
+    &__link {
+        font-family: var(--font3);
+        font-weight: 300;
+        font-size: 14px;
+        text-decoration: underline;
+        text-decoration-skip-ink: none;
+        color: #a7a7a7;
+    }
+
     &__box {
         justify-content: flex-end;
         margin-bottom: 49px;
@@ -275,14 +284,20 @@
     height: 10px !important;
     background-color: transparent;
     margin-top: 40px;
-
+@media (max-width: 769px) {
+display: none;
+}
     .swiper-scrollbar-drag {
         height: 10px;
         /* Толщина полоски */
         background-color: #e2e2e2;
         /* Цвет полоски */
         margin-top: 20px;
+        width: 53% !important;
         bottom: 0;
+        @media (max-width: 768px) {
+            margin-top: 1 !important;
+        }
     }
 }
 
@@ -292,8 +307,10 @@
     flex-direction: row;
     justify-content: flex-start;
 }
+
 .admin-content {
     flex: auto;
     padding-top: 40px;
     overflow-y: auto;
 }
+

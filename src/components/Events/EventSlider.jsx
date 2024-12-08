@@ -18,14 +18,12 @@ const EventSlider = ({ events, onEventClick }) => {
       }}
       autoplay={{ delay: 3000, disableOnInteraction: false }}
       pagination={{ clickable: true }}
-      style={{ padding: '20px 30px 0px 0px' }}
       className="events__list"
     >
       {events.map((event) => (
         <SwiperSlide
           key={event._id}
           className="events__list-item"
-          style={{ maxWidth: '487px' }}
           onClick={() => onEventClick(event)}
         >
           <div className="_img">

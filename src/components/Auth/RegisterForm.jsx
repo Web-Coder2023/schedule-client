@@ -11,26 +11,32 @@ const RegisterForm = ({ closeAuthModal }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showModal, setShowModal] = useState(false);
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+
     if (password !== confirmPassword) {
       alert("Пароли не совпадают");
       return;
     }
-    registerUser(name, subname, phone, password).then(() => {
-      setShowModal(true); // Показываем модальное окно после успешной регистрации
-    });
+
+    try {
+      await registerUser(name, subname, phone, password); // Регистрация без активации
+      setShowModal(true); // Показ модального окна
+    } catch (error) {
+      alert("Ошибка при регистрации. Попробуйте снова.");
+      console.error(error);
+    }
   };
 
   const handleConfirmation = () => {
     setShowModal(false);
-    closeAuthModal(); // Закрываем модальное окно регистрации после подтверждения
+    closeAuthModal(); // Закрываем окно регистрации
   };
 
   return (
     <>
       <form className="register-form" onSubmit={handleRegister}>
-<div className="auth-modal__input">
+        <div className="auth-modal__input">
           <label htmlFor="reg-name">Имя</label>
           <input
             id="reg-name"
@@ -86,12 +92,17 @@ const RegisterForm = ({ closeAuthModal }) => {
           />
         </div>
         <div className="auth-modal__box reg">
-          <button type="submit" className="_btn">Зарегистрироваться</button>
+          <button type="submit" className="_btn">
+            Зарегистрироваться
+          </button>
         </div>
       </form>
 
       {showModal && (
-        <ConfirmationModal onClose={() => setShowModal(false)} onConfirm={handleConfirmation} />
+        <ConfirmationModal
+          onClose={() => setShowModal(false)}
+          onConfirm={handleConfirmation}
+        />
       )}
     </>
   );

@@ -1,5 +1,8 @@
 .events {
     margin-bottom: 100px;
+    &:last-child {
+        margin-bottom: 0;
+    }
 
     &__container {
         padding-left: 12px;
@@ -16,6 +19,10 @@
 
             .date {
                 font-size: 52px;
+
+                @media (max-width: 768px) {
+                    font-size: 34px;
+                }
             }
 
             .vertical-line {
@@ -23,6 +30,14 @@
                 width: 4px;
                 background-color: #000;
                 min-height: 40px;
+
+                @media (max-width: 768px) {
+                    min-height: 36px;
+                }
+            }
+
+            @media (max-width: 768px) {
+                font-size: 26px;
             }
         }
     }
@@ -32,21 +47,28 @@
         display: flex;
         padding-left: 30.24px;
         padding-right: 20px;
+        @media (max-width: 768px) {
+            margin-top: 20px;
+        }
 
         &-item {
-            width: 487px;
+            width: 487px !important;
             cursor: pointer;
-            
+            margin-right: 33px !important;
+
+            @media (max-width: 768px) {
+                width: 304px !important;
+            }
+
             &:hover {
                 ._img {
                     transform: scale(1.05);
                 }
             }
+
             
             ._img {
                 transition: all 0.6s ease-in-out;
-                width: 487px;
-                height: 298px;
                 border-radius: 30px;
                 overflow: hidden;
             }
@@ -62,12 +84,41 @@
                 text-align: center;
                 color: #000;
                 font-family: $font-family;
-
+                
                 .vertical-line {
                     display: block;
                     width: 2px;
                     background-color: #000;
                     min-height: 24px;
+                }
+            }
+            @media (max-width: 768px) {
+                &:hover {
+                    ._img {
+                        transform: none;
+                    }
+                }
+                ._img {
+                    border-radius: 20px;
+                }
+                ._parallelogram {
+                    width: 39px;
+                    height: 21px;
+                    border-radius: 3px;
+                }
+                ._wrap-status {
+                    gap: 14px;
+                    margin-top: 13px;
+                }
+                ._wrap-status h3 {
+                    font-size: 24px;
+                }
+                .time-place {
+                    font-size: 17px;
+                    margin-top: 2px;
+                    .vertical-line {
+                        min-height: 15px;
+                    }
                 }
             }
         }

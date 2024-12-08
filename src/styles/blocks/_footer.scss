@@ -3,21 +3,31 @@
     margin-top: 100px;
 
     &__container {
-        padding-top: 55px;
         display: flex;
         align-items: center;
         font-size: 36px;
         color: #fff;
         text-align: center;
-        padding-left: 47px;
+        padding: 0 20px;
+        padding-top: 55px;
         font-family: $font-family;
+        gap: 40px;
+
         a {
             font-size: inherit;
         }
     }
 
+    &__logo {
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
     &__title {
         font-weight: 900;
+        font-size: 2vw;
     }
 
     &__col {
@@ -25,18 +35,29 @@
         display: flex;
         flex-direction: column;
         max-width: 1341px;
+
         .line {
             width: 100%;
             background-color: #fff;
             height: 3px;
-margin-bottom: 18px;
+            margin-bottom: 18px;
         }
     }
 
     &__icons {
-        margin: 36px auto 31px auto;
+        margin: 2vw auto 31px auto;
         display: flex;
         gap: 23px;
+
+        a {
+            display: block;
+            width: 6vw;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
     }
 
     &__contact {
@@ -44,20 +65,100 @@ margin-bottom: 18px;
         flex-direction: column;
         gap: 6px;
         font-weight: 200;
+        p {
+            font-size: 2vw;
+        }
+
         .footer__title {
             margin-bottom: 18px;
         }
+
         a {
             font-weight: 400;
         }
+
         a.com {
             display: flex;
             align-items: center;
             margin: 0 auto;
             gap: 6px;
+
             img {
                 width: 75px;
                 height: 75px;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding-right: 6px;
+        background: #2c2c2c;
+        margin-top: 60px;
+
+        &__container {
+            gap: 20px;
+            padding: 20px;
+        }
+
+        &__logo {
+            max-width: 446px;
+
+            img {
+                width: 100%;
+                height: 100%;
+
+            }
+        }
+
+        &__title {
+            font-weight: 900;
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        &__col {
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+
+            .line {
+                width: 100%;
+                background-color: #fff;
+                height: 3px;
+                margin-bottom: 18px;
+            }
+        }
+
+        &__icons {
+            margin-bottom: 21px;
+            margin-top: 15px;
+
+            a {
+                width: 52px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+
+        &__contact {
+            gap: 3px;
+
+            a,
+            p {
+                font-size: 16px;
+            }
+
+            a.com {
+                img {
+                    width: 42px;
+                    height: 42px;
+                    object-fit: cover;
+                }
             }
         }
     }

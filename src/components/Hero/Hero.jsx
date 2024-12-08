@@ -7,11 +7,16 @@ import ResetPassword from '../Auth/ResetPassword';
 import SvgAnimation from '../SvgAnimation';
 
 const Hero = () => {
+    // Извлекаем userData из localStorage, добавляем проверку на наличие данных
+    const userData = localStorage.getItem('userData');
+    const parsedUser = userData ? JSON.parse(userData) : null;
+    console.log(parsedUser); // Можете удалить этот лог, если не нужно
+
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const [isRegister, setIsRegister] = useState(false);
     const [isResetPassword, setIsResetPassword] = useState(false);
     const [resetStep, setResetStep] = useState(1);
-    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false); // State for logout confirmation modal
+    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
     const { user, logoutUser } = useContext(AuthContext);
 
@@ -23,8 +28,8 @@ const Hero = () => {
         setResetStep(1);
     };
 
-    const openLogoutModal = () => setIsLogoutModalOpen(true); // Open logout confirmation modal
-    const closeLogoutModal = () => setIsLogoutModalOpen(false); // Close logout confirmation modal
+    const openLogoutModal = () => setIsLogoutModalOpen(true);
+    const closeLogoutModal = () => setIsLogoutModalOpen(false);
 
     const handleLogout = () => {
         logoutUser();
@@ -36,7 +41,7 @@ const Hero = () => {
             <section className="hero">
                 <div className="hero__container">
                     <div className="hero__image _img">
-                        <SvgAnimation />
+                        <SvgAnimation /> {/* Убедитесь, что этот компонент корректно работает */}
                     </div>
                     <div className="hero__box">
                         <h1>Подземелья Lounge</h1>
@@ -45,7 +50,7 @@ const Hero = () => {
                         {user ? (
                             <div className="hero__profile">
                                 <h2>Приветствую, <b>{user.name} {user.subname}</b></h2>
-                                <button className="_btn" onClick={openLogoutModal}>Выйти</button> {/* Open logout modal */}
+                                <button className="_btn" onClick={openLogoutModal}>Выйти</button>
                             </div>
                         ) : (
                             <button className="_btn" onClick={openAuthModal}>Войти</button>

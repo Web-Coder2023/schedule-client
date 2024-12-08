@@ -41,7 +41,7 @@ const AuthForm = ({ setIsResetPassword, closeAuthModal }) => {
                 <button type="submit" className="_btn">Войти</button>
                 <button
                     type="button"
-                    className="forgot-link"
+                    className="reset__link"
                     onClick={() => setIsResetPassword(true)}
                 >
                     Забыли пароль?
