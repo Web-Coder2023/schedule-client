@@ -1,28 +1,36 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import ConfirmationModal from "../Modal/ConfirmationModal";
 
 const RegisterForm = ({ closeAuthModal }) => {
-    const { registerUser } = useContext(AuthContext);
-    const [name, setName] = useState("");
-    const [subname, setSubname] = useState("");
-    const [phone, setPhone] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-  
-    const handleRegister = (e) => {
-      e.preventDefault();
-      if (password !== confirmPassword) {
-        alert("Пароли не совпадают");
-        return;
-      }
-      registerUser(name, subname, phone, password).then(() => {
-        closeAuthModal(); // Закрываем модальное окно после успешной регистрации
-      });
-    };
-  
-    return (
+  const { registerUser } = useContext(AuthContext);
+  const [name, setName] = useState("");
+  const [subname, setSubname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Пароли не совпадают");
+      return;
+    }
+    registerUser(name, subname, phone, password).then(() => {
+      setShowModal(true); // Показываем модальное окно после успешной регистрации
+    });
+  };
+
+  const handleConfirmation = () => {
+    setShowModal(false);
+    closeAuthModal(); // Закрываем модальное окно регистрации после подтверждения
+  };
+
+  return (
+    <>
       <form className="register-form" onSubmit={handleRegister}>
-        <div className="auth-modal__input">
+<div className="auth-modal__input">
           <label htmlFor="reg-name">Имя</label>
           <input
             id="reg-name"
@@ -81,8 +89,12 @@ const RegisterForm = ({ closeAuthModal }) => {
           <button type="submit" className="_btn">Зарегистрироваться</button>
         </div>
       </form>
-    );
-  };
-  
+
+      {showModal && (
+        <ConfirmationModal onClose={() => setShowModal(false)} onConfirm={handleConfirmation} />
+      )}
+    </>
+  );
+};
 
 export default RegisterForm;
