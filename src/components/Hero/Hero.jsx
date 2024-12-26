@@ -7,10 +7,6 @@ import ResetPassword from '../Auth/ResetPassword';
 import SvgAnimation from '../SvgAnimation';
 
 const Hero = () => {
-    // Извлекаем userData из localStorage, добавляем проверку на наличие данных
-    const userData = localStorage.getItem('userData');
-    const parsedUser = userData ? JSON.parse(userData) : null;
-    console.log(parsedUser); // Можете удалить этот лог, если не нужно
 
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const [isRegister, setIsRegister] = useState(false);

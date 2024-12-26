@@ -8,8 +8,9 @@ const AuthForm = ({ setIsResetPassword, closeAuthModal }) => {
 
     const handleLogin = (e) => {
         e.preventDefault();
+        
         loginUser(phone, password).then(() => {
-            closeAuthModal(); // Закрываем модальное окно после успешного входа
+            closeAuthModal();
         });
     };
 

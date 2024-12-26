@@ -2,12 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Scrollbar } from 'swiper/modules';
-import Modal from '../Modal/Modal';
+import Modal from './Modal-All';
 import { getEvents } from '../../api/api';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 
 const AllEvents = () => {
+  const baseUrl = process.env.REACT_APP_URL_IMAGE;
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -116,7 +117,7 @@ const AllEvents = () => {
                     onClick={() => openModal(event)}
                   >
                     <div className="_img">
-                      <img src={event.image} alt={event.title} />
+                    <img src={`${baseUrl}${event.image}`} alt={event.title} />
                     </div>
                     <div className="box">
                       <div className="_wrap-status">

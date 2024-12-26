@@ -136,6 +136,20 @@ main {
 	display: block;
 	border-radius: 13px;
 }
+._recording {
+	padding: 9px;
+	text-align: center;
+	font-family: $font-family;
+	font-weight: 400;
+	font-size: 20px;
+	text-transform: uppercase;
+	text-align: center;
+	color: #fff;
+
+	background: #1A813C;
+	display: block;
+	border-radius: 13px;
+}
 
 ._close {
 	width: 45px;
@@ -154,6 +168,7 @@ body._lock {
     align-items: flex-end;
 	h3 {
 		margin: 0;
+		line-height: calc((22 / 32) * 100%);
 		font-weight: 700;
 		font-size: 32px;
 		font-family: $font-family;

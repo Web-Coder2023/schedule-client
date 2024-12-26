@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/scrollbar';
 
 const EventSlider = ({ events, onEventClick }) => {
+  const baseUrl = process.env.REACT_APP_URL_IMAGE;
   return (
     <Swiper
       modules={[Scrollbar]}
@@ -27,7 +28,7 @@ const EventSlider = ({ events, onEventClick }) => {
           onClick={() => onEventClick(event)}
         >
           <div className="_img">
-            <img src={event.image} alt={event.title} />
+            <img src={`${baseUrl}${event.image}`} alt={event.title} />
           </div>
           <div className="box">
             <div className="_wrap-status">
@@ -37,10 +38,12 @@ const EventSlider = ({ events, onEventClick }) => {
             <p className="time-place">
               <span className="time">{event.time}</span>
               <i className="vertical-line"></i>
-              {event.seats > 0 ? (
-                <span className="place">Осталось мест: {event.seats}</span>
+              {event.maxParticipants - event.participants.length > 0 ? (
+                <span className="place">
+                  Осталось мест: {event.maxParticipants - event.participants.length}
+                </span>
               ) : (
-                <span className="_error-place">мест нет</span>
+                <span className="_error-place">Мест нет</span>
               )}
             </p>
           </div>
