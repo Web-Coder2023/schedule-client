@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Menu from '../components/Admin/Menu';
-import AllEvents from '../components/Admin/AllEvants';
+import AllEvents from '../components/Admin/AllEvents';
 import CreateEvent from '../components/Admin/CreateEvent';
+import ArchiveEvents from '../components/Admin/ArchiveEvents';
 
 const HomePageAdmin = () => {
-  const [activeMenu, setActiveMenu] = useState('create-event');
+  // При загрузке страницы пытаемся получить значение из localStorage
+  const savedMenu = localStorage.getItem('activeMenu') || 'create-event'; // по умолчанию 'create-event'
+  const [activeMenu, setActiveMenu] = useState(savedMenu);
+
+  // Каждый раз, когда activeMenu изменяется, сохраняем его в localStorage
+  useEffect(() => {
+    localStorage.setItem('activeMenu', activeMenu);
+  }, [activeMenu]);
 
   const renderContent = () => {
     switch (activeMenu) {
@@ -13,7 +21,7 @@ const HomePageAdmin = () => {
       case 'event-list':
         return <AllEvents />;
       case 'event-archive':
-        return <div>Архив мероприятий</div>; // Замените на компонент архива, если он есть
+        return <ArchiveEvents />;
       default:
         return null;
     }

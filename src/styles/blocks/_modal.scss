@@ -16,7 +16,7 @@
         padding: 35px 20px;
         
         &-box {
-            max-width: 1541px;
+            min-width: 1541px;
             overflow-y: auto;
             height: 100%;
             padding-right: 10px;
@@ -48,7 +48,7 @@
         background: #fff;
 
         &-image {
-            height: 841px;
+            width: 100%;
             margin: 0 auto;
             // padding-right: 10px;
         }
@@ -80,7 +80,11 @@
             margin: 40px 0;
         }
     }
-
+._close {
+    position: absolute;
+    top: 35px;
+    right: 35px;
+}
     &__descr {
         font-weight: 400;
         font-size: 28px;

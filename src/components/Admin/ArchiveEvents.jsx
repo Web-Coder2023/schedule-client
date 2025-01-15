@@ -1,25 +1,25 @@
-// components/AllEvents.jsx
 import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Scrollbar } from 'swiper/modules';
-import Modal from './Modal-All';
-import { getEvents } from '../../api/api';
+import ModalArchive from './Modal-Archiv';
+import { getArchivedEvents } from '../../api/api';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 
-const AllEvents = () => {
+const ArchiveEvents = () => {
   const baseUrl = process.env.REACT_APP_URL_IMAGE;
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const currentDate = new Date();
+  const [filter, setFilter] = useState('Все');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchDate, setSearchDate] = useState(''); // Новый стейт для даты
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const data = await getEvents();
+        const data = await getArchivedEvents();
         setEvents(data);
         setLoading(false);
       } catch (error) {
@@ -39,8 +39,21 @@ const AllEvents = () => {
     return <div>{error}</div>;
   }
 
-  // Сортировка мероприятий: сначала по разнице в датах, потом по убыванию даты
-  const sortedEvents = events.sort((a, b) => {
+  // Текущая дата для сортировки
+  const currentDate = new Date();
+
+  // Фильтруем события по выбранному типу, названию и дате
+  const filteredEvents = events.filter((event) => {
+    const eventDate = new Date(event.date).toISOString().split('T')[0]; // Форматируем дату
+    return (
+      (filter === 'Все' || event.type === filter) &&
+      event.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+      (searchDate === '' || eventDate === searchDate) // Фильтр по дате
+    );
+  });
+
+  // Сортировка мероприятий по близости к текущей дате
+  const sortedEvents = filteredEvents.sort((a, b) => {
     const aDate = new Date(a.date);
     const bDate = new Date(b.date);
 
@@ -57,9 +70,9 @@ const AllEvents = () => {
     return bDate - aDate;
   });
 
-  // Группировка мероприятий
+  // Группировка мероприятий по дате
   const groupedEvents = sortedEvents.reduce((acc, event) => {
-    const eventDate = new Date(event.date).toDateString();
+    const eventDate = new Date(event.date).toISOString().split('T')[0];
     if (!acc[eventDate]) {
       acc[eventDate] = [];
     }
@@ -76,7 +89,30 @@ const AllEvents = () => {
   };
 
   return (
-    <>
+    <div>
+      {/* Фильтры и строка поиска */}
+      <div className="filters">
+        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+          <option value="Все">Все</option>
+          <option value="Игры Подземелий">Игры Подземелий</option>
+          <option value="Королевская битва Подземелий">Королевская битва Подземелий</option>
+          <option value="Игры от частных мастеров">Игры от частных мастеров</option>
+          <option value="Бронь стола для самостоятельной игры">Бронь стола для самостоятельной игры</option>
+        </select>
+        <input
+          type="text"
+          placeholder="Поиск по названию"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <input
+          type="date"
+          placeholder="Поиск по дате"
+          value={searchDate}
+          onChange={(e) => setSearchDate(e.target.value)}
+        />
+      </div>
+
       {Object.entries(groupedEvents).map(([date, eventsOnDate]) => {
         const formattedDate = new Date(date).toLocaleDateString('ru-RU', {
           month: '2-digit',
@@ -117,7 +153,7 @@ const AllEvents = () => {
                     onClick={() => openModal(event)}
                   >
                     <div className="_img">
-                    <img src={`${baseUrl}${event.image}`} alt={event.title} />
+                      <img src={`${baseUrl}${event.image}`} alt={event.title} />
                     </div>
                     <div className="box">
                       <div className="_wrap-status">
@@ -127,10 +163,12 @@ const AllEvents = () => {
                       <p className="time-place">
                         <span className="time">{event.time}</span>
                         <i className="vertical-line"></i>
-                        {event.seats > 0 ? (
-                          <span className="place">Осталось мест: {event.seats}</span>
+                        {event.maxParticipants - event.participants.length > 0 ? (
+                          <span className="place">
+                            Осталось мест: {event.maxParticipants - event.participants.length}
+                          </span>
                         ) : (
-                          <span className="_error-place">мест нет</span>
+                          <span className="_error-place">Мест нет</span>
                         )}
                       </p>
                     </div>
@@ -142,9 +180,9 @@ const AllEvents = () => {
         );
       })}
 
-      <Modal isOpen={!!selectedEvent} onClose={closeModal} event={selectedEvent} />
-    </>
+      <ModalArchive isOpen={!!selectedEvent} onClose={closeModal} event={selectedEvent} />
+    </div>
   );
 };
 
-export default AllEvents;
+export default ArchiveEvents;

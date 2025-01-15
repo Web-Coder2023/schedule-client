@@ -51,3 +51,13 @@
         height: 100%;
     }
 }
+form .searchform.wd-style-with-bg.woodmart-ajax-search{
+    height: var(--wd-form-height) !important;
+}
+input .searchform.wd-style-with-bg.woodmart-ajax-search{
+    height: 100% !important;
+    border: var(--wd-form-brd-width) solid var(--wd-form-brd-color) !important;
+    border-radius: var(--wd-form-brd-radius) !important;
+    background-color: var(--wd-form-bg) !important;
+    margin: 0 !important;
+}

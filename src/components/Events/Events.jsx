@@ -1,4 +1,3 @@
-// components/Events/Events.jsx
 import React, { useState, useEffect } from 'react';
 import Modal from '../Modal/Modal';
 import { getEvents } from '../../api/api';

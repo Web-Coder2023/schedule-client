@@ -1,9 +1,29 @@
 import React from 'react';
+import { restoreEvent, deleteEvent } from '../../api/api'; // Импортируем функцию
 
-const Modal = ({ isOpen, onClose, event }) => {
+const ModalArchive = ({ isOpen, onClose, event }) => {
   const baseUrl = process.env.REACT_APP_URL_IMAGE;
   if (!isOpen) return null;
-
+  const restoreArchive = async () => {
+    try {
+      await restoreEvent(event._id); // Отправляем запрос с id события
+      alert('Востановленно'); // Уведомление об успешной архивации
+      onClose(); // Закрытие модального окна после архивации
+    } catch (error) {
+      alert('Ошибка'); // Обработка ошибки
+      onClose(); // Закрытие модального окна после архивации
+    }
+  };
+  const deleteArchive = async () => {
+    try {
+      await deleteEvent(event._id); // Отправляем запрос с id события
+      alert('Востановленно'); // Уведомление об успешной архивации
+      onClose(); // Закрытие модального окна после архивации
+    } catch (error) {
+      alert('Ошибка'); // Обработка ошибки
+      onClose(); // Закрытие модального окна после архивации
+    }
+  };
   return (
     <div className={`modal ${isOpen ? '_open' : ''}`} onClick={onClose}>
       <div className="modal__body" onClick={(e) => e.stopPropagation()}>
@@ -16,7 +36,7 @@ const Modal = ({ isOpen, onClose, event }) => {
             <h3>{event.title}</h3>
           </div>
           <div className="modal__buttons">
-            <button className="_vost">Восстановить</button><button className="_delited">Удалить</button>
+            <button className="_vost" onClick={restoreArchive}>Восстановить</button><button  onClick={deleteArchive}className="_delited">Удалить</button>
           </div>
           <ul className="modal__list">
             <li><b>Тип события: </b>{event.type}</li>
@@ -56,4 +76,4 @@ const Modal = ({ isOpen, onClose, event }) => {
 };
 
 
-export default Modal;
+export default ModalArchive;

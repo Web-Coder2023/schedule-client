@@ -94,9 +94,115 @@ export const logout = async () => {
 
 // Получение списка мероприятий
 export const getEvents = async () => {
-  const response = await axios.get(`${API_URL}/events`);
-  return response.data;
+  try {
+    const response = await axios.get(`${API_URL}/events`);
+    return response.data;
+  } catch (error) {
+    throw error;  // Перебрасываем ошибку, чтобы обработать ее в компоненте
+  }
 };
+// Получение списка мероприятий в архиве
+export const getArchivedEvents = async () => {
+  const token = localStorage.getItem('token'); // Получаем токен из localStorage
+
+  if (!token) {
+    throw new Error('Пользователь не авторизован');
+  }
+
+  try {
+    // Отправляем запрос на сервер
+    const response = await axios.post(
+      `${API_URL}/archived-events`, 
+      {}, // Тело запроса пустое, т.к. передаем только токен в заголовке
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Токен в заголовке
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    throw error; // Бросаем ошибку дальше
+  }
+};
+
+// Архивация события
+export const archiveEvent = async (id) => {
+  const token = localStorage.getItem('token'); // Получаем токен из localStorage
+
+  if (!token) {
+    throw new Error('Пользователь не авторизован');
+  }
+
+  try {
+    // Отправляем запрос на сервер с id события в URL
+    const response = await axios.put(
+      `${API_URL}/events/${id}/archive`, // Добавляем id в URL
+      {}, // Тело запроса пустое, если не нужно передавать данные
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Токен в заголовке
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    throw error; // Бросаем ошибку дальше
+  }
+};
+// 67836452cfdf58a6dfcf4efd
+export const deleteEvent = async (id) => {
+  const token = localStorage.getItem('token'); // Получаем токен из localStorage
+console.log(localStorage.getItem('token'));
+
+  if (!token) {
+    throw new Error('Пользователь не авторизован');
+  }
+
+  try {
+    const response = await axios.delete(
+      `${API_URL}/events/${id}/delete`, // URL с ID события
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Токен в заголовке
+        },
+      }
+    );    
+
+    return response.data;
+  } catch (error) {
+    throw error; // Бросаем ошибку дальше
+  }
+};
+
+// Востановление события
+export const restoreEvent = async (id) => {
+  const token = localStorage.getItem('token'); // Получаем токен из localStorage
+
+  if (!token) {
+    throw new Error('Пользователь не авторизован');
+  }
+
+  try {
+    // Отправляем запрос на сервер с id события в URL
+    const response = await axios.put(
+      `${API_URL}/events/${id}/restore`, // Добавляем id в URL
+      {}, // Тело запроса пустое, если не нужно передавать данные
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Токен в заголовке
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    throw error; // Бросаем ошибку дальше
+  }
+};
+
 
 // Регистрация пользователя на мероприятие
 export const registerForEvent = async (eventId, userId) => {

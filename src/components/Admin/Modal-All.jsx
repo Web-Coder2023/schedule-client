@@ -1,7 +1,19 @@
 import React from 'react';
+import { archiveEvent } from '../../api/api'; // Импортируем функцию
 
 const Modal = ({ isOpen, onClose, event }) => {
   const baseUrl = process.env.REACT_APP_URL_IMAGE;
+
+  const handleArchive = async () => {
+    try {
+      await archiveEvent(event._id); // Отправляем запрос с id события
+      alert('Событие успешно архивировано'); // Уведомление об успешной архивации
+      onClose(); // Закрытие модального окна после архивации
+    } catch (error) {
+      alert('Ошибка при архивировании события'); // Обработка ошибки
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -16,7 +28,9 @@ const Modal = ({ isOpen, onClose, event }) => {
             <h3>{event.title}</h3>
           </div>
           <div className="modal__buttons">
-            <button className="_redact">Редактировать</button><button className="_isArchive">В архив</button><button className="_delited">Удалить</button> <button className="_delited">Отменить</button> 
+            <button className="_redact">Редактировать</button>
+            <button className="_isArchive" onClick={handleArchive}>В архив</button> {/* Обработчик клика */}
+            <button className="_delited">Отменить</button>
           </div>
           <ul className="modal__list">
             <li><b>Тип события: </b>{event.type}</li>
@@ -54,6 +68,5 @@ const Modal = ({ isOpen, onClose, event }) => {
     </div>
   );
 };
-
 
 export default Modal;
